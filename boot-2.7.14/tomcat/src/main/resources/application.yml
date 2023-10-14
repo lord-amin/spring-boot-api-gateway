@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      #      default-filters:
+      #        - TokenRelay
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user-management
+          uri: lb://user-management
+          predicates:
+            - Path=/user-management/**
+          filters:
+            - RewritePath=/(?<path>.*), /$\{path}
+
+        - id: push-service
+          uri: lb://push-service
+          predicates:
+            - Path=/push-service/**
+          filters:
+            - RewritePath=/(?<path>.*), /$\{path}
+
+    consul:
+      host: 192.168.102.82
+      port: 8099
+      discovery:
+        register: true
+        prefer-ip-address: true
+        instance-id: ${spring.application.name}:-${server.port}:${vcap.application.instance_id:${spring.application.instance_id:proto}}
+        health-check-critical-timeout: 10s
+
+        heartbeat:
+          enabled: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${keycloak.base-server-address-https}/realms/${keycloak.realm}
+          jwk-set-uri: ${keycloak.base-server-address}/realms/${keycloak.realm}/protocol/openid-connect/certs
+  main:
+    web-application-type: reactive
+
+logging:
+  level:
+    root: info
+    org.apache.http: info
+    org.apache.tomcat: info
+    org.springframework.cloud.consul.discovery: info
+
+keycloak:
+  base-server-address: http://192.168.102.82:8080
+  base-server-address-https: https://192.168.102.82:8081
+  realm: mbp
+server:
+  port: 8080
+app:
+  security:
+    ignorePathList: /swagger-resources,/swagger-resources/**,/swagger-ui.html,/swagger-ui/,/swagger-ui/**,/v3,/v3/**,/api/v2/api-docs,/api/v2/api-docs/**,/api,/api/**,/actuator,/actuator/**,/login,/login/,/login/**,/webjars/*,/user-management/login
