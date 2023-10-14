@@ -1,0 +1,11 @@
+/boot-2.7.14/tomcat/target/
+/boot-2.7.14/netty/target/
+/boot-3.1.4/netty/target/
+#/boot-2.7.14/netty/.idea/
+#/boot-2.7.14/tomcat/.idea/
+/.idea/
+
+/boot-2.7.14/netty/api-gateway-boot2-netty.iml
+/boot-2.7.14/tomcat/api-gateway-boot2-tomcat.iml
+/boot-3.1.4/netty/api-gateway-service.iml
+/boot-2.7.14/tomcat/.idea/.gitignore
