@@ -9,3 +9,4 @@
 /boot-2.7.14/tomcat/api-gateway-boot2-tomcat.iml
 /boot-3.1.4/netty/api-gateway-service.iml
 /boot-2.7.14/tomcat/.idea/.gitignore
+/boot-2.7.14/auth-server/target/
