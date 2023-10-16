@@ -35,14 +35,16 @@ spring:
         heartbeat:
           enabled: true
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${keycloak.base-server-address-https}/realms/${keycloak.realm}
-          jwk-set-uri: ${keycloak.base-server-address}/realms/${keycloak.realm}/protocol/openid-connect/certs
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: ${keycloak.base-server-address-https}/realms/${keycloak.realm}
+#          jwk-set-uri: ${keycloak.base-server-address}/realms/${keycloak.realm}/protocol/openid-connect/certs
   main:
     web-application-type: reactive
+  profiles:
+    active: spring
 
 logging:
   level:
@@ -51,10 +53,6 @@ logging:
     org.apache.tomcat: info
     org.springframework.cloud.consul.discovery: info
 
-keycloak:
-  base-server-address: http://192.168.102.82:8080
-  base-server-address-https: https://192.168.102.82:8081
-  realm: mbp
 server:
   port: 8080
 app:

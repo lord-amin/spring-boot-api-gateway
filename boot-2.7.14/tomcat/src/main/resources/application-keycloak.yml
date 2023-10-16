@@ -1,0 +1,15 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+#          spring authorization server
+#          issuer-uri: http://localhost:8081/
+          issuer-uri: ${keycloak.base-server-address-https}/realms/${keycloak.realm}
+#          spring authorization server
+#          jwk-set-uri: http://localhost:8081/oauth2/jwks
+          jwk-set-uri: ${keycloak.base-server-address}/realms/${keycloak.realm}/protocol/openid-connect/certs
+keycloak:
+  base-server-address: http://192.168.102.82:8080
+  base-server-address-https: https://192.168.102.82:8081
+  realm: mbp
